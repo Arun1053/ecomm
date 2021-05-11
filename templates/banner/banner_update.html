@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{%block titlebar%}
+  <title> Banner </title>
+{%endblock%}
+
+{% block page-head %}
+    Banner Page
+{% endblock %}
+
+{% block breadcrumb %}
+   Banner Page
+{% endblock %}
+
+
+{% block wrapper%}
+
+
+<div class="col-md-12">
+    <div class="card card-primary">
+
+       <form  method="POST" action ="{% url 'update_banner' id %}" enctype="multipart/form-data"  >
+           <div class="card-body">
+
+               {% csrf_token %}
+
+                    {% for field in form %}
+
+                        <div class=" form-group is-invalid" aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
+                            {{ field.label_tag }}{% if field.field.required %}<span class="required">*</span>{% endif %}
+
+                            {{ field }}
+
+                            {% if field.errors %}
+                                <div class="col-sm-6">
+                                    <strong id="passwordHelp" class="text-danger">
+                                {{ field.errors }}
+                                    </strong>
+                                </div>
+                             {% endif %}
+
+                            <p class="help">{{ field.help_text|safe }}</p>
+                        </div>
+
+                     {% endfor %}
+
+
+
+           </div>
+
+           <div class="card-footer">
+                <button type="submit"  class="btn btn-primary">update</button>
+               <a class="btn btn-default" href = "{% url 'banner_list' %}">cancle</a>
+
+           </div>
+       </form>
+    </div>
+</div>
+
+
+{% endblock%}
+
+
+{%block extra%}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.js"></script>
+<!--<script src="{% static 'formset/jquery.formset.js' %}"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.formset/1.2.2/jquery.formset.min.js"></script>-->
+<script type="text/javascript">
+$('.formset_row').formset({
+addText: '<button class ="btn btn-primary">+</button>',
+deleteText: '<button class ="btn btn-danger">-</button>',
+prefix: '{{ formset.prefix }}'
+});
+</script>
+
+{%endblock%}
+

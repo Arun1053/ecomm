@@ -1,0 +1,124 @@
+{% load static %}
+{% for product in products %}
+
+							<div class="col-sm-4">
+								<div class="product-image-wrapper">
+									<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="{{product.product_image.first.image_name.url }}" alt="" style="max-width:255.48px;min-width:255.48px;max-height:245px;min-height:245px;" />
+												{% if product.special_price_test %}
+
+														<h2 ><span style="text-decoration: line-through; color:black;">${{product.price}}</span>${{product.special_price}}</h2>
+
+												{% else %}
+
+														<h2>${{product.price}}</h2>
+
+												{% endif %}
+												<p>{{product.name}}</p>
+												<a href="" class="btn btn-default add-to-cart"  data-action ="add" data-product = '{{ product.id }}'  ><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											</div>
+
+											<div class="product-overlay">
+
+
+
+												<a href="{% url 'Home:ProductDetail' product.id %}" >
+													<div class="overlay-content">
+
+												{% if product.special_price_test %}
+														<h2 ><span style="text-decoration: line-through; color:black;">${{product.price}}</span>${{product.special_price}}</h2>
+
+												{% else %}
+
+														<h2>${{product.price}}</h2>
+
+												{% endif %}
+
+													<p>{{product.short_description}}</p>
+													<a href="" class="btn btn-default add-to-cart"  data-action ="add" data-product = '{{ product.id }}'   ><i class="fa fa-shopping-cart"></i>Add to cart</a>
+													</div>
+												</a>
+											</div>
+										{% if product.special_price_test %}
+										<img src="static/Eshopper/images/home/sale.png" class="new" alt="">
+										{% endif %}
+										{% if product.is_new %}
+										<img src="static/Eshopper/images/home/new.png" class="new" alt="">
+										{% endif %}
+
+<!--										<img src="static/Eshopper/images/home/new.png" class="new" alt="">-->
+									</div>
+
+									<div class="choose">
+										<ul class="nav nav-pills nav-justified">
+											<li><a href="" class="add-to-whishlist" data-action="add" data-product = '{{ product.id }}' ><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+						{% endfor %}
+
+
+<!--{% for product in products %}-->
+
+
+<!--							<div class="col-sm-4">-->
+<!--								<div class="product-image-wrapper">-->
+<!--									<div class="single-products">-->
+<!--											<div class="productinfo text-center">-->
+<!--												<img src="../../../{{product.product_image.first.image_name.url }}" alt="" width="255.48" height="225" />-->
+<!--												{% if product.special_price_test %}-->
+
+<!--														<h2 ><span style="text-decoration: line-through; color:black;">${{product.price}}</span>${{product.special_price}}</h2>-->
+
+<!--												{% else %}-->
+
+<!--														<h2>${{product.price}}</h2>-->
+
+<!--												{% endif %}-->
+<!--												<p>{{product.name}}</p>-->
+<!--												<a href="" class="btn btn-default add-to-cart"  data-action ="add" data-product = '{{ product.id }}'  ><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
+<!--											</div>-->
+
+<!--											<div class="product-overlay">-->
+
+
+
+<!--												<a href="{% url 'Home:ProductDetail' product.id %}" >-->
+<!--													<div class="overlay-content">-->
+
+<!--												{% if product.special_price_test %}-->
+<!--														<h2 ><span style="text-decoration: line-through; color:black;">${{product.price}}</span>${{product.special_price}}</h2>-->
+
+<!--												{% else %}-->
+
+<!--														<h2>${{product.price}}</h2>-->
+
+<!--												{% endif %}-->
+
+<!--													<p>{{product.short_description}}</p>-->
+<!--													<a href="" class="btn btn-default add-to-cart"  data-action ="add" data-product = '{{ product.id }}'   ><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
+<!--													</div>-->
+<!--												</a>-->
+<!--											</div>-->
+<!--										{% if product.special_price_test %}-->
+<!--										<img src="../../static/Eshopper/images/home/sale.png" class="new" alt="">-->
+<!--										{% endif %}-->
+<!--										{% if product.is_new %}-->
+<!--										<img src="../../static/Eshopper/images/home/new.png" class="new" alt="">-->
+<!--										{% endif %}-->
+
+<!--									</div>-->
+
+<!--									<div class="choose">-->
+<!--										<ul class="nav nav-pills nav-justified">-->
+<!--											<li><a href="" class="add-to-whishlist" data-action="add" data-product = '{{ product.id }}' ><i class="fa fa-plus-square"></i>Add to wishlist</a></li>-->
+<!--										</ul>-->
+<!--									</div>-->
+<!--								</div>-->
+
+<!--							</div>-->
+
+<!--						{% endfor %}-->

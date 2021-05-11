@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+{%block titlebar%}
+  <title> Banner lists </title>
+{%endblock%}
+
+{% block page-head %}
+    Banner Page
+{% endblock %}
+
+{% block breadcrumb %}
+   Banner Page
+{% endblock %}
+
+{% block wrapper%}
+
+
+
+
+
+ <section class="content">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+                <div class="col-12">
+
+                    <a href="{% url 'add_banner' %}" class="btn btn-primary float-right">
+                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <span><strong>Add +</strong></span>
+                    </a>
+
+                 </div>
+              <h3 class="card-title">Banner</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-hover">
+
+                <thead>
+                    <tr>
+
+                      <th>id</th>
+                      <th>Banner name</th>
+                      <th>image</th>
+                      <th>url</th>
+                      <th>created_by</th>
+<!--                        <th>created_date</th>-->
+                      <th>status</th>
+                      <th>Edit/Delete</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for banner in banners %}
+
+                     <tr>
+                       <td> {{ banner.id }}</td>
+                       <td> {{ banner.banner_name }}</td>
+                         <td><a href="{{ banner.image }}"><img src="{{ banner.image }}" width="100" height="100"></a></td>
+                       <td>{{ banner.url }}</td>
+                       <td> {{ banner.created_by.get_full_name }} </td>
+                       <td>{% if  banner.status == True %}<i class="fa fa-check" aria-hidden="true"></i>{% else %}
+                          <i class="fa fa-times" aria-hidden="true"></i>{% endif %}</td>
+
+                         <td>
+
+                             <a href="{% url 'update_banner' banner.id %}" class="btn btn-primary ">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+
+                                </a>
+                                 <a href="#myModal-{{banner.id}}" class="btn btn-danger" data-toggle="modal">
+                                     <i class="fa fa-trash"></i>
+                                 </a>
+
+                                <div id="myModal-{{banner.id}}" class="modal fade" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Confirmation</h5>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Do you want to delete Banner?</p>
+<!--                                                <p class="text-secondary"><small>If you don't save, your changes will be lost.</small></p>-->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <a type="button" class="btn btn-danger" href="{% url 'delete_banner' banner.id %}" >Confirm</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                         </td>
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+ </section>
+
+{%endblock%}
+
+{%block extra%}
+
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js'%}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+<!-- DataTables -->
+<script src="{% static 'plugins/datatables/jquery.dataTables.js'%}"></script>
+<script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.js'%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js'%}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'dist/js/demo.js'%}"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $('#example1').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+    });
+  });
+</script>
+
+{%endblock%}
